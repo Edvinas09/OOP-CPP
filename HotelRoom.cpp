@@ -24,15 +24,14 @@ class HotelRoom
     public:
 
 
-    HotelRoom()
+    HotelRoom(int number)
     {
+        roomNumber = number;
+        roomType = "Single";
+        pricePerNight = 0;
         id = nextID++;
         count++;
-        roomType = "Undefined";
-        roomNumber = 0;
-        pricePerNight = 0;
     };
-
 
     HotelRoom(string type, int number, int price)
     {
@@ -114,11 +113,11 @@ int HotelRoom::count = 0;
 
 int main(int argc, char const *argv[])
 {
-    HotelRoom room("Single", 10, 500);
+    HotelRoom room(10);
 
     HotelRoom* rooms[4] = {
         new HotelRoom("Lux", 3, 500),
-        new HotelRoom("Suite", 4, 200),
+        new HotelRoom("Suite",4, 200),
         new HotelRoom("Triple", 5, 30),
         new HotelRoom("Presidential", 6, 1000)
     };
@@ -130,7 +129,7 @@ int main(int argc, char const *argv[])
     assert(room.getRoomNumber() == 10);
     room.setRoomNumber(1);
     assert(room.getRoomNumber() == 1);
-    assert(room.getPricePerNight() == 500);
+    assert(room.getPricePerNight() == 0);
     room.setPricePerNight(50);
     assert(room.getPricePerNight() == 50);
     
@@ -146,5 +145,6 @@ int main(int argc, char const *argv[])
     assert(room7.getId() == 6);
 
     assert(room.getCount() == 2);
+
     return 0;
 }
