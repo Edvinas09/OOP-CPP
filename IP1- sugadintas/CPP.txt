@@ -1,0 +1,27 @@
+Klase: 
+
+Klases vardas is didziosios, laukai, konstruktoriai, destruktoriai, metodai ir tik tada mainas.
+
+Dokumentacija, vardas pavarde, kas as, klases aprasas
+
+Enkapsuliacija, setteris (vienas laukas turi tureti if, jei duomenys netinka, reikia mest exceptiona), getteris
+
+Metodas toString(string stream).
+
+2 konstruktoriai ir destruktorius(gali nieko nedaryt).
+
+
+Maine turi but assertai. Objektu sarasas su new. Maine turi buti iskviesti visi metodai(istestuot).
+
+Su statiniais laukais sunumeruot( auto id) ir getid().
+
+Laukas objektu skaiciavimui.
+
+Butinai objektu sarasas
+
+Testai:
+
+1. Sukurus objekta su konstruktorium su getteriais gaunam reiksmes kurias uzsetinom, ir toString turi but toks koki parasem.
+
+2. Patikrint objektu kieki ir ju skaiciu.
+
