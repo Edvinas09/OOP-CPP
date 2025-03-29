@@ -6,3 +6,10 @@ Parengt pdf: sugalvot pavadinima(komandos, projekto), projekto aprasymas, komand
 -> nurodyt vartotojo puse(uml diagramos), bent vieno scenarijaus veiklos diagramos(proceso flowchart), parodyt auksto lygio struktura(komponentu diagrama, esmine architektura)->
 -> parodyt duomenu tekme(iskur imam, kur atsiranda rezultatai pvz. e-shop - useris gali pridet, paziet uzakymu info ir t.t pavaizdavimas)->
 ->parodyt technologiju stacka, padaryt proof of concept(padaryt projekto specifini hello world, reikia ivardint ka kam naudojam), linkas i githuba, sekti laika(savaitine suvestine individuali ir bendra)-
+
+
+
+Komandos pavadinimas: Git Happens
+Komandos nariai: 
+Projekto pavadinimas: Terraquest
+Projekto aprašymas: Žaidimas, kuriame žaidėjai kasa resursus, iš jų stato bazes, gamina karius, su kuriais puola kitus žaidėjus arba bot'us
