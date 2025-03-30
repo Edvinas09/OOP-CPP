@@ -44,13 +44,37 @@ public:
     }
 };
 
-// Initialize static count
+
 int HashTable::Impl::count = 0;
 
 // Rest of the implementation remains the same as in the previous example
 HashTable::HashTable(int cap) : pImpl(std::make_unique<Impl>(cap)) {}
 
 HashTable::~HashTable() = default;
+
+
+
+// Copy constructor - fix the initialization of pImpl
+HashTable::HashTable(const HashTable& other) : pImpl(std::make_unique<Impl>(other.pImpl->capacity)) {
+    pImpl->size = other.pImpl->size;
+    pImpl->table = other.pImpl->table;
+    // Note: Don't increment count here as it's already incremented in Impl constructor
+}
+
+// Copy assignment operator - fix the creation of newImpl
+HashTable& HashTable::operator=(const HashTable& other) {
+    if (this != &other) {
+        // Create new implementation with the same capacity
+        auto newImpl = std::make_unique<Impl>(other.pImpl->capacity);
+        newImpl->size = other.pImpl->size;
+        newImpl->table = other.pImpl->table;
+        // Swap the new implementation with the current one
+        pImpl = std::move(newImpl);
+    }
+    return *this;
+}
+
+
 
 // Static method to get count
 int const HashTable::getCount() {
@@ -126,19 +150,15 @@ void HashTable::deleteEntry(int key) {
 }
 
 // Display the hash table
-void HashTable::display(std::string filename) {
-    std::ofstream file(filename, std::ios::app);
+void HashTable::display() {
     for (int i = 0; i < pImpl->capacity; ++i) {
         if (pImpl->table[i].occupied && !pImpl->table[i].deleted) {
             std::cout << "Index " << i << ": (" << pImpl->table[i].key << ", " << pImpl->table[i].value << ")\n";
-            file << "Index " << i << ": (" << pImpl->table[i].key << ", " << pImpl->table[i].value << ")\n";
         } else {
             std::cout << "Index " << i << ": EMPTY\n";
-            file << "Index " << i << ": EMPTY\n";
         }
     }
-    file<<"\n";
-    file.close();
+    std::cout << "\n";
 }
 
 HashTable& HashTable::operator+=(const std::pair<int, int>& keyValuePair) {
@@ -170,10 +190,22 @@ HashTable& HashTable::operator!() {
     return *this;    // Return the current object to allow chaining
 }
 
-HashTable& HashTable::operator()(int key) {
-    read(key);
-    return *this;
+int HashTable::operator()(int key) {
+    return read(key); 
 }
 
+
+std::string HashTable::toString() const {
+    std::string result;
+    for (int i = 0; i < pImpl->capacity; ++i) {
+        if (pImpl->table[i].occupied && !pImpl->table[i].deleted) {
+            if (!result.empty()) {
+                result += ", "; // Add a comma separator for multiple entries
+            }
+            result += "(" + std::to_string(pImpl->table[i].key) + ": " + std::to_string(pImpl->table[i].value) + ")";
+        }
+    }
+    return result.empty() ? "EMPTY" : result; // Return "EMPTY" if no entries exist
+}
 
 

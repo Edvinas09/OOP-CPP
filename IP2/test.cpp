@@ -7,6 +7,7 @@
 int main() {
     try
     {
+        // basic functionality tests
         HashTableNamespace::HashTable ht(10);
         ht.create(5, 50);
         ht.create(15, 150);
@@ -39,6 +40,52 @@ int main() {
         assert(HashTableNamespace::HashTable::getCount() == 1);
         ht2.~HashTable();
         assert(HashTableNamespace::HashTable::getCount() == 0);
+
+        // operator overloads
+        HashTableNamespace::HashTable ht3(5);
+        ht3.create(1, 10);
+        ht3.create(2, 20);
+        ht3.create(3, 30);
+
+        ht3 += std::make_pair(4, 40);
+        assert(ht3.read(4) == 40);
+
+        ht3 -= 4;
+        assert(ht3.read(4) == -1); 
+
+        ht3[std::make_pair(1, 15)];
+        assert(ht3.read(1) == 15);
+
+        !ht3;
+        assert(ht3.read(1) == -1);
+        assert(ht3.read(2) == -1);
+
+
+        assert(HashTableNamespace::HashTable::getCount() == 1); 
+        ht3.~HashTable();
+        assert(HashTableNamespace::HashTable::getCount() == 0); 
+
+        //copy constructor and assignment operator
+        HashTableNamespace::HashTable ht1(5);
+        ht1.create(1, 100);
+        ht1.create(2, 200);
+
+        HashTableNamespace::HashTable ht2 = ht1; 
+        assert(ht2.read(1) == 100);
+        assert(ht2.read(2) == 200);
+
+        ht2.update(1, 150);
+        assert(ht1.read(1) == 100); 
+        assert(ht2.read(1) == 150);
+
+        HashTableNamespace::HashTable ht3(5);
+        ht3 = ht1; 
+        assert(ht3.read(1) == 100);
+        assert(ht3.read(2) == 200);
+
+        ht3.deleteEntry(2);
+        assert(ht1.read(2) == 200);
+        assert(ht3.read(2) == -1);
     }
     catch(...)
     {

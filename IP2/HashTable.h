@@ -15,27 +15,29 @@ class HashTable {
     // Forward declaration of Impl class
     class Impl;
 
-    // Ensure this is declared BEFORE any methods that use it
     std::unique_ptr<Impl> pImpl; // Pointer to the implementation
 
 public:
     HashTable(int cap);         // Constructor
     ~HashTable();               // Destructor
 
-    void create(int key, int value);
-    int const read(int key);
-    void update(int key, int newValue);
-    void deleteEntry(int key);
-    void display(std::string filename);
-    static int const getCount();
+    HashTable(const HashTable& other); // Copy constructor
+    HashTable& operator=(const HashTable& other); // Copy assignment operator
+
+    void create(int key, int value); // Insert a new entry
+    int const read(int key); // Read an entry by key
+    void update(int key, int newValue); // Update an existing entry
+    void deleteEntry(int key); // Delete an entry by key
+    void display();  // Display the hash table
+    static int const getCount(); // Get the count of HashTable objects
 
     HashTable& operator+=(const std::pair<int, int>& keyValuePair); // Overload += operator for creating entries
     HashTable& operator-=(int key); // Overload -= operator for deleting entries
     HashTable& operator[](const std::pair<int, int>& keyValuePair); // Overload -= operator for deleting entries
     HashTable& operator!(); // Overload ! operator for displaying the hash table
-    HashTable& operator()(int key); // Overload () operator for reading entries
+    int operator()(int key); // Overload () operator for reading entries
 
-
+    std::string toString() const; // Convert the hash table to a string representation
 
 };
 
