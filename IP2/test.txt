@@ -1,0 +1,4 @@
+Crud tests passed
+Crud tests passed
+Operator tests passed
+Deep Copy tests passed

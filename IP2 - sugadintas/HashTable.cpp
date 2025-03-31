@@ -88,7 +88,7 @@ void HashTable::update(int key, int newValue) {
 
     while (pImpl->table[index].occupied) {
         if (pImpl->table[index].key == key && !pImpl->table[index].deleted) {
-            pImpl->table[index].value = newValue;
+            pImpl->table[index].value = newValue+1;
             return;
         }
         index = (index + 1) % pImpl->capacity;
