@@ -9,14 +9,14 @@ using namespace HashTableNamespace;
 
 MyHashTableException::MyHashTableException(const std::string& message) : msg(message) {}
 
-// what() method implementation
+// what() method
 const char* MyHashTableException::what() const noexcept {
     return msg.c_str();
 }
 
 // Full definition of Impl class
 class HashTable::Impl {
-public:
+private:
     struct Entry {
         int key;
         int value;
@@ -24,6 +24,7 @@ public:
         bool deleted;
     };
 
+    friend class HashTable;
     static int count;
 
     std::vector<Entry> table;
@@ -54,14 +55,13 @@ HashTable::~HashTable() = default;
 
 
 
-// Copy constructor - fix the initialization of pImpl
+// Copy constructor 
 HashTable::HashTable(const HashTable& other) : pImpl(std::make_unique<Impl>(other.pImpl->capacity)) {
     pImpl->size = other.pImpl->size;
     pImpl->table = other.pImpl->table;
-    // Note: Don't increment count here as it's already incremented in Impl constructor
 }
 
-// Copy assignment operator - fix the creation of newImpl
+// Copy assignment operator
 HashTable& HashTable::operator=(const HashTable& other) {
     if (this != &other) {
         // Create new implementation with the same capacity
@@ -173,6 +173,7 @@ HashTable& HashTable::operator-=(int key) {
     return *this;
 }
 
+//[] pakeisti i ~=
 HashTable& HashTable::operator[](const std::pair<int, int>& keyValuePair) {
 
     int key = keyValuePair.first;
@@ -190,6 +191,7 @@ HashTable& HashTable::operator!() {
     return *this;    // Return the current object to allow chaining
 }
 
+//pakeisti () i []
 int HashTable::operator()(int key) {
     return read(key); 
 }

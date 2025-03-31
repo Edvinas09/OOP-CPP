@@ -35,7 +35,7 @@ int main() {
         ht2.create(10, 100);
         assert(ht2.read(10) == 100);
     
-    
+    //nekviest destruktoriaus, bloaki arba delete
         ht.~HashTable();
         assert(HashTableNamespace::HashTable::getCount() == 1);
         ht2.~HashTable();
@@ -87,6 +87,7 @@ int main() {
         assert(ht1.read(2) == 200);
         assert(ht3.read(2) == -1);
     }
+    //parasyt ar test passsed ar test failed
     catch(...)
     {
         std::cout << "An exception occurred\n";
