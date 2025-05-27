@@ -23,7 +23,7 @@ double HouseRental::calculatePrice(int days, double price){
         totalPrice += cleaningFee* 1.2; 
     }
 
-    return totalPrice + ((peopleCount - 1) * 10) + cleaningFee;
+    return totalPrice + ((peopleCount - 1) * 30) + cleaningFee;
 }
 
 int HouseRental::getPeopleCount() const {

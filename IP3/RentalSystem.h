@@ -30,7 +30,7 @@ private:
 
 public:
     CarRental(bool isElectric=false, int minimumDrivingAge=18, bool unlimitedMileage=false, int driverAge=18);
-    int getDriverAge(int age);
+    int getDriverAge() const;
     void setDriverAge(int age);
     bool getElectric() const;
     int getMinimumDrivingAge() const;
@@ -48,7 +48,7 @@ class HouseRental : public RentalPricer
     double cleaningFee;
     bool hasPets;
 public:
-    HouseRental(int peopleCount=1, double cleaningFee=20.0, bool hasPets=false);
+    HouseRental(int peopleCount=1, double cleaningFee=50.0, bool hasPets=false);
     int getPeopleCount() const;
     void setPeopleCount(int count);
     double getCleaningFee() const;

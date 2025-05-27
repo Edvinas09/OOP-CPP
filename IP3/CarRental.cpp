@@ -30,7 +30,7 @@ double CarRental::calculatePrice(int days, double price) {
     return totalPrice;
 }
 
-int CarRental::getDriverAge(int age) {
+int CarRental::getDriverAge() const {
     return driverAge;
 }
 void CarRental::setDriverAge(int age) {
