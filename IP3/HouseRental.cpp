@@ -1,57 +1,58 @@
-#include "RentalStrategy.h"
+#include "RentalSystem.h"
+#include <stdexcept>
 
-double HouseRental::calculatePrice(int days, double basePrice) {
-    return days * basePrice;
+
+HouseRental::HouseRental(int peopleCount, double cleaningFee, bool hasPets)
+    : RentalPricer(100, "House"), peopleCount(peopleCount), cleaningFee(cleaningFee), hasPets(hasPets) {
+    if (peopleCount < 1) {
+        throw std::invalid_argument("People count must be at least 1.");
+    }
+}
+
+double HouseRental::calculatePrice(int days, double price){
+    if (days < 1) {
+        throw std::invalid_argument("Days must be at least 1.");
+    }
+    if (price < 0) {
+        throw std::invalid_argument("Price must be non-negative.");
+    }
+
+    double totalPrice = days * price;
+
+    if (hasPets) {
+        totalPrice += cleaningFee* 1.2; 
+    }
+
+    return totalPrice + ((peopleCount - 1) * 10) + cleaningFee;
+}
+
+int HouseRental::getPeopleCount() const {
+    return peopleCount;
+}
+
+void HouseRental::setPeopleCount(int count) {
+    if (count < 1) {
+        throw std::invalid_argument("People count must be at least 1.");
+    }
+    peopleCount = count;
+}
+
+double HouseRental::getCleaningFee() const {
+    return cleaningFee;
+}
+
+void HouseRental::setCleaningFee(double fee) {
+    if (fee < 0) {
+        throw std::invalid_argument("Cleaning fee must be non-negative.");
+    }
+    cleaningFee = fee;
 }
 
 
-/*
-
-class StrategyInterface {
-public:
-    virtual ~StrategyInterface() = default;
-    virtual void execute() const = 0;
-};
-
-class ConcreteStrategyA : public StrategyInterface {
-    void execute() const override{
-        std::cout << "Doing work using strategy A" << std::endl;
-    }
-};
-
-class ConcreteStrategyB : public StrategyInterface {
-    void execute() const override{
-        std::cout << "Doing work using strategy B" << std::endl;
-    }
-};
-
-
-class Context {
-private:
-    std::unique_ptr<StrategyInterface> strategy_;
-public:
-    void SetStrategy(std::unique_ptr<StrategyInterface>& strategy) {
-        strategy_ = std::move(strategy);
-    }
-    void PerformWork(){
-        strategy_->execute();
-    }
-};
-
-void ClientCode() {
-
-    Context c;
-    std::unique_ptr<StrategyInterface> strategy = std::make_unique<ConcreteStrategyA>();
-    c.SetStrategy(strategy);
-    c.PerformWork();
-
-    strategy = std::make_unique<ConcreteStrategyB>();
-    c.SetStrategy(strategy);
-    c.PerformWork();
+bool HouseRental::getHasPets() const {
+    return hasPets;
 }
 
-int main() {    
-    ClientCode();
-    return 0;
+void HouseRental::setHasPets(bool hasPets) {
+    this->hasPets = hasPets;
 }
-    */
