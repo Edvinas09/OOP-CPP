@@ -9,11 +9,11 @@ private:
     double pricePerDay;
     std::string StrategyType;
 public:
-    RentalPricer();
     RentalPricer(double pricePerDay, std::string type);
+    RentalPricer();
     virtual ~RentalPricer() = default;
     
-    virtual double calculatePrice(int days, double price) = 0;
+    virtual double calculatePrice(int days, double price);
 
     virtual void setPricePerDay(double price);
     virtual double getPricePerDay() const;

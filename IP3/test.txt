@@ -1,0 +1,3 @@
+Car Rental Tests passed successfully.
+House Rental Tests passed successfully.
+Bike Rental Tests passed successfully.
