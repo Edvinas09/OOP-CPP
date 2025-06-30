@@ -48,4 +48,3 @@ make all
 
 - All code was written as part of coursework for a university OOP class.
 - Unit tests are included in each project to verify correctness.
-- See individual `.cpp` files for more details and documentation.
